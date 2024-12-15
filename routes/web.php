@@ -28,7 +28,7 @@ Route::middleware(['auth', 'admin'])->prefix('dashboard')->group(function () {
     Route::get('/users', [UserController::class, 'index'])->name('dashboard.users');
     Route::get('/reports', [TransactionController::class, 'index'])->name('dashboard.reports');
 
-    Route::resource('books', BookController::class);
+    Route::resource('books', BookController::class); 
     Route::resource('users', UserController::class);
 });
 
