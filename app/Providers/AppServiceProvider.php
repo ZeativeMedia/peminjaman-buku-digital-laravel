@@ -17,6 +17,11 @@ class AppServiceProvider extends ServiceProvider
             return Auth::check() && Auth::user()->role === $role;
         });
 
+        if ($this->app->environment() == 'production') {
+            \URL::forceScheme('https');
+            \URL::forceRootUrl(\Config::get('app.url'));
+        }
+
     }
 
     /**

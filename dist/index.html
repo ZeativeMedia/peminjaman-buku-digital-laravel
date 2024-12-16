@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Sistem Peminjaman Buku Digital</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+
+<script type="module" src="http://[::1]:5173/@vite/client"></script><link rel="stylesheet" href="http://[::1]:5173/resources/css/app.css" /></head>
+<body class="flex flex-col antialiased w-full min-h-dvh max-w-5xl mx-auto">
+    <dialog id="modals_tambah_data_buku" class="modal modal-bottom sm:modal-middle">
+    <form method="POST" action="http://localhost/dashboard/books" enctype="multipart/form-data" class="modal-box">
+        <input type="hidden" name="_token" value="vv6ZgfdNrxYn9TSia5zXZmSh1OVGSfXAQvy6D994" autocomplete="off">        <h3 class="text-lg font-bold border-b pb-3">Tambah Data Buku</h3>
+
+        <div class="flex flex-col gap-3 mt-5">
+            <div class="flex flex-col gap-2">
+                <img id="coverPreview" class="w-40 h-full rounded-lg" src="#" alt="Cover Preview">
+                <p class="text-sm font-bold mt-2">— Pilih Cover Buku</p>
+                <input type="file" name="cover" class="file-input file-input-bordered px-0 input-sm w-full" accept="image/*" onchange="previewImage(event)" required />
+            </div>
+            <div class="flex flex-col gap-2">
+                <p class="text-sm font-bold mt-2">— Masukan Judul Buku</p>
+                <input type="text" name="title" placeholder="Buku Pemograman Bahasa Golang Indonesia" class="input input-bordered input-sm w-full" required />
+            </div>
+            <div class="flex flex-col gap-2">
+                <p class="text-sm font-bold mt-2">— Masukan Author Buku</p>
+                <input type="text" name="author" placeholder="Gus Miftah" class="input input-bordered input-sm w-full" required />
+            </div>
+            <div class="flex flex-col gap-2">
+                <p class="text-sm font-bold mt-2">— Masukan Tahun Rilis</p>
+                <input type="number" name="year_published" placeholder="2024" class="input input-bordered input-sm w-full" required />
+            </div>
+            <div class="flex flex-col gap-2">
+                <p class="text-sm font-bold mt-2">— Masukan Stok Buku</p>
+                <input type="number" name="stock" placeholder="100" class="input input-bordered input-sm w-full" required />
+            </div>
+        </div>
+
+        <div class="modal-action">
+            <button type="button" onclick="modals_tambah_data_buku.close()" class="btn btn-sm btn-error text-white">Batalkan</button>
+            <button type="submit" class="btn btn-sm btn-info text-white">Publikasi</button>
+        </div>
+    </form>
+</dialog>
+
+<script>
+    const thumbnail = document.getElementById('coverPreview');
+    thumbnail.style.display = 'none';
+
+    function previewImage(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function() {
+            thumbnail.src = reader.result;
+            thumbnail.style.display = 'block';
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    }
+
+</script>
+    
+    <header class="navbar bg-white border-b">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+                    </svg>
+                </div>
+                <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                    <li><a>Author</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="navbar-center">
+            <a class="flex title-font font-medium items-center text-gray-900">
+    <h1 class="text-xl font-bold"><span class="font-black text-red-500">Pin</span>Buku</h1>
+</a>
+        </div>
+        <div class="navbar-end gap-3">
+                        <a href="/auth/signin" class="btn btn-sm btn-ghost">
+                Masuk
+            </a>
+            <a href="/auth/signup" class="btn btn-sm">
+                Daftar
+            </a>
+            
+                    </div>
+
+    </header>
+    <main class=" flex flex-col">
+        <main class="flex flex-col justify-between w-full antialiased">
+
+        <section class="mx-auto">
+            <div class="text-gray-600 body-font">
+                <div class="container px-5 py-10 mx-auto flex flex-wrap">
+                    <div class="flex w-full mb-10 flex-wrap">
+                        <h1 class="sm:text-3xl text-2xl font-bold leading-relaxed title-font text-gray-900 lg:w-1/2 lg:mb-0 mb-4">Peminjaman Buku <span class="text-red-500">Digital</span><br><span class="text-gray-400">Mudah dan Gratis.</span></h1>
+                        <div class="lg:pl-6 lg:w-2/4 mx-auto flex flex-col">
+                            <div class="h-1 mb-5 w-1/2 bg-red-500"></div>
+                            <p class="leading-relaxed text-base">Sistem perpustakaan berbasis web yang memudahkan peminjaman dan pengembalian buku, dilengkapi dengan laporan detail, pengelolaan data, dan akses user-friendly untuk semua pengguna.</p>
+                        </div>
+                    </div>
+                                        <div class="flex flex-wrap md:-m-2 -m-1 overflow-hidden rounded-[50px]">
+                        <div class="flex flex-wrap w-1/2">
+                            <div class="md:p-2 p-1 w-1/2">
+                                <img alt="gallery" class="w-full object-cover h-full object-center block" src="https://media.istockphoto.com/id/169993375/id/foto/rak-buku-di-dalam-perpustakaan-umum-stockholm.jpg?s=612x612&w=0&k=20&c=CQdtdcolghOfsFEWWsqEuK-UrFhIvuu5Qw1UwL57BFk=">
+                            </div>
+                            <div class="md:p-2 p-1 w-1/2">
+                                <img alt="gallery" class="w-full object-cover h-full object-center block" src="https://media.istockphoto.com/id/1085770318/id/foto/rak-buku-coklat-kayu-dengan-lampu.jpg?s=612x612&w=0&k=20&c=DbQKGWBytqzMxk_xliUkZxbqpYhOfj2R4vIuALxm8Eg=">
+                            </div>
+                            <div class="md:p-2 p-1 w-full">
+                                <img alt="gallery" class="w-full h-full object-cover object-center block" src="https://media.istockphoto.com/id/1458679553/id/foto/sekelompok-siswa-sma-menggunakan-laptop-di-perpustakaan.jpg?s=612x612&w=0&k=20&c=6kDeIpaGf--PepN7lRGW4-Ex3sKTaxJPn8ro5F51W-I=">
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap w-1/2">
+                            <div class="md:p-2 p-1 w-full">
+                                <img alt="gallery" class="w-full h-full object-cover object-center block" src="https://media.istockphoto.com/id/1437365584/id/foto/perpustakaan-modern.jpg?s=612x612&w=0&k=20&c=__eBkpyJ1_P1ahrPNUUl5KDnFV3MD-_D7t0R_5wAVyg=">
+                            </div>
+                            <div class="md:p-2 p-1 w-1/2">
+                                <img alt="gallery" class="w-full object-cover h-full object-center block" src="https://media.istockphoto.com/id/1460007178/id/foto/perpustakaan-buku-buku-di-atas-meja-dan-latar-belakang-untuk-belajar-belajar-dan-penelitian-di.jpg?s=612x612&w=0&k=20&c=N9NrTxLpSdqhzyNkLgZTaKwjOzDbH1ds_e0mzJTK79c=">
+                            </div>
+                            <div class="md:p-2 p-1 w-1/2">
+                                <img alt="gallery" class="w-full object-cover h-full object-center block" src="https://media.istockphoto.com/id/910852368/id/foto/buku-pencarian-siswa.jpg?s=612x612&w=0&k=20&c=-6gt_Z1PN23Pquobax83on3DoGiEOGzmWkXDKAU1DS0=">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    </main>
+    <footer class="text-gray-600 bg-white body-font border-t mt-auto">
+        <div class="container py-5 mx-auto flex items-center sm:flex-row flex-col">
+            <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:py-2 sm:mt-0 mt-4">
+                © 2024 PinBuku — Adri Pratama
+            </p>
+            <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+                <a class="text-gray-500">
+                    <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                        <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                    </svg>
+                </a>
+                <a class="ml-3 text-gray-500">
+                    <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                        <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+                        <circle cx="4" cy="4" r="2" stroke="none"></circle>
+                    </svg>
+                </a>
+                <a class="ml-3 text-gray-500">
+                    <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                        <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                    </svg>
+                </a>
+                <a class="ml-3 text-gray-500">
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                    </svg>
+                </a>
+            </span>
+        </div>
+    </footer>
+</body>
+</html>
