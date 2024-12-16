@@ -15,7 +15,7 @@
         "APP_ENV": "production",
         "APP_DEBUG": "false",
         "APP_URL": "https://pinbuku.vercel.app",
-        "APP_KEY": "base64:7ygUefn2GPKOZcHrgIFrDhQTjf2kGHe6DixyhvA57IY=",
+        "APP_KEY": "base64:ocGC7dnTQjYJj9MXIx8koEyLaRExyuoR2ouGke2WX6U=",
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
         "APP_PACKAGES_CACHE": "/tmp/packages.php",
