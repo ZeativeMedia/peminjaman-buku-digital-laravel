@@ -14,7 +14,7 @@
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "false",
-        "APP_URL": "https://yourproductionurl.com",
+        "APP_URL": "https://pinbuku.vercel.app",
         "APP_KEY": "base64:7ygUefn2GPKOZcHrgIFrDhQTjf2kGHe6DixyhvA57IY=",
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
